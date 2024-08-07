@@ -12,7 +12,7 @@ function logger(req, res, next) {
   try {
     const user = await User.getById(req.params.id)
     if (!user) {
-      next({ status: 404, message: "user not found" })
+      next({ status: 404, message: 'user not found' })
     } else {
       req.user = user
       next()
