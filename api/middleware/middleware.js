@@ -12,7 +12,7 @@ function logger(req, res, next) {
   try {
     const user = await User.getById(req.params.id)
     if (!user) {
-      next({ status: 404, message: 'user not found' })
+      next({ status: 404, message: "user not found" })
     } else {
       req.user = user
       next()
@@ -46,7 +46,6 @@ function validatePost(req, res, next) {
     req.name = text.trim()
     next()
   }
-  next()
 }
 
 module.exports = {

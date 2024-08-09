@@ -58,30 +58,26 @@ router.get('/:id/posts', validateUserId, async (req, res, next) => {
    }
 });
 
-router.post(
-  '/:id/posts', 
-  validateUserId, 
-  validatePost, 
-  async (req, res, next) => {
+router.post('/:id/posts', validateUserId, validatePost, async (req, res, next) => {
  try {
     const result = await Post.insert({
       user_id: req.params.id,
-      text: req.text,
+      text: req.body.text
     })
-    res.status(201).json(result)
+    res.status(201).json(result);
  } catch (err) {
-  next(err)
+  next(err);
  }
 });
 
 router.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
-    customMessage: ' something good inside posts router happened',
+    customMessage: 'something good inside posts router happened',
     message: err.message,
     stack: err.stack, 
   })
 })
 
 // do not forget to export the router
-module.exports = router
+module.exports = router;
 
